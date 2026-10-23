@@ -1,0 +1,231 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #f4f7fb;
+  color: #1e293b;
+}
+
+button {
+  font: inherit;
+}
+
+.app {
+  width: min(100% - 32px, 680px);
+  margin: 40px auto;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgb(15 23 42 / 8%);
+  text-align: center;
+}
+
+.app h1 {
+  margin: 0 0 24px;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  letter-spacing: -1px;
+  color: #0f172a;
+}
+
+.mode-controls,
+.game-controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.mode-controls button,
+.game-controls button,
+.scoreboard button {
+  padding: 11px 16px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.mode-controls button:hover,
+.game-controls button:hover,
+.scoreboard button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  width: min(100%, 360px);
+  margin: 24px auto;
+}
+
+.cell {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 2px solid #dbe4f0;
+  border-radius: 14px;
+  background: #f8fafc;
+  color: #2563eb;
+  font-size: clamp(2.5rem, 10vw, 4rem);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.cell:not(:disabled):hover {
+  border-color: #93c5fd;
+  background: #eff6ff;
+}
+
+.cell:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.winning-cell {
+  border-color: #16a34a;
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.scoreboard,
+.history {
+  margin-top: 26px;
+  padding: 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #f8fafc;
+  text-align: left;
+}
+
+.scoreboard h2,
+.history h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+.scoreboard p {
+  display: inline-block;
+  margin: 8px 16px 12px 0;
+}
+
+.history ol {
+  padding-left: 24px;
+}
+
+.history li {
+  margin: 8px 0;
+}
+
+.error {
+  padding: 12px;
+  border-radius: 10px;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+@media (max-width: 480px) {
+  .app {
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    padding: 18px 14px;
+  }
+
+  .mode-controls button,
+  .game-controls button {
+    flex: 1;
+  }
+
+  .scoreboard p {
+    display: block;
+    margin: 8px 0;
+  }
+}
+.cell.winning-cell,
+.cell.winning-cell:disabled {
+  background: #dcfce7;
+  border: 2px solid #16a34a;
+  color: #15803d;
+  opacity: 1;
+}
+.game-controls button,
+.mode-controls button,
+.scoreboard button,
+button.reset-scoreboard {
+  font: inherit;
+  padding: 11px 16px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.reset-scoreboard:hover {
+  background: #1d4ed8;
+}
+.scoreboard-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}
+
+.scoreboard-stats p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.scoreboard-stats strong {
+  font-size: 1.1rem;
+}
+.winner-message {
+  display: inline-block;
+  background: #dcfce7;
+  color: #166534;
+  border: 2px solid #22c55e;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  animation: winner-pop 0.3s ease-out;
+}
+
+.draw-message {
+  color: #92400e;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+@keyframes winner-pop {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
